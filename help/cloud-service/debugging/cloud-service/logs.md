@@ -31,6 +31,16 @@ AEM as a Cloud Services does not support custom log files, however it does suppo
 
 For Java logs to be available in AEM as a Cloud Service (via [Cloud Manager](#cloud-manager) or [Adobe I/O CLI](#aio)), custom log statements must be written the `error.log`. Logs written to custom named logs, such as `example.log`, will not be accessible from AEM as a Cloud Service.
 
+This can be achieved with a Sling LogManager OSGi configuration property of: 
+
+```
+{
+   ...
+   "org.apache.sling.commons.log.file": "logs/error.log"
+   ...
+}   
+```
+
 ## AEM Author and Publish service logs
 
 Both AEM Author and Publish services provide AEM runtime server logs:
@@ -177,8 +187,10 @@ This requires updating the logging OSGi configurations to use the environment sp
 
 ```
 {
+    ...
     "org.apache.sling.commons.log.names": ["com.example"],
     "org.apache.sling.commons.log.level": "$[env:LOG_LEVEL;default=DEBUG]"
+    ...
 }
 ```
 
