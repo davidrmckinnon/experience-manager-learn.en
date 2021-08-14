@@ -348,7 +348,7 @@ Sling Models are annotation driven Java "POJO's" (Plain Old Java Objects) that f
 
 ### Review Maven Dependencies {#maven-dependency}
 
-The Byline Sling Model will rely on several Java APIs provided by AEM. These APIs are made available via the `dependencies` listed in the `core` module's POM file. The project used for this tutorial has been built for AEM as a Cloud Service. However it is unique in that it is backward's compatible with AEM 6.5/6.4. Therefore both dependencies for Cloud Service and AEM 6.x are included.
+The Byline Sling Model will rely on several Java APIs provided by AEM. These APIs are made available via the `dependencies` listed in the `core` module's POM file. The project used for this tutorial has been built for AEM as a Cloud Service. However it is unique in that it is backwards compatible with AEM 6.5/6.4. Therefore both dependencies for Cloud Service and AEM 6.x are included.
 
 1. Open the `pom.xml` file beneath `<src>/aem-guides-wknd/core/pom.xml`.
 1. Find the dependency for `aem-sdk-api` - **AEM as a Cloud Service Only**
@@ -374,7 +374,7 @@ The Byline Sling Model will rely on several Java APIs provided by AEM. These API
     ...
     ```
 
-    The `uber-jar` is only included when the `classic` profile is invoked, i.e `mvn clean install -PautoInstallSinglePackage -Pclassic`. Again, this is unique to this project. In a real-world project, generated from the AEM Project Archetype the `uber-jar` will be the default if the version of AEM specified is 6.5 or 6.4. 
+    The `uber-jar` is only included when the `classic` profile is invoked, that is `mvn clean install -PautoInstallSinglePackage -Pclassic`. Again, this is unique to this project. In a real-world project, generated from the AEM Project Archetype the `uber-jar` will be the default if the version of AEM specified is 6.5 or 6.4. 
 
     The [uber-jar](https://docs.adobe.com/content/help/en/experience-manager-65/developing/devtools/ht-projects-maven.html#experience-manager-api-dependencies) contains all public Java APIs exposed by AEM 6.x. The version is maintained in the Parent reactor pom located at the root of the project `aem-guides-wknd/pom.xml`.
 
@@ -440,7 +440,7 @@ Create a public Java Interface for the Byline. `Byline.java` defines the public 
 
 1. Java packages that contain public Java classes, in this case a Sling Model, must be versioned using the package's  `package-info.java` file. 
 
-Since the WKND source's Java package `com.adobe.aem.guides.wknd.core.models` declares are version of `2.0.0`, and we are adding a non-breaking public interface and methods, the version must be increased to `2.1.0`. Open the file at `core/src/main/java/com/adobe/aem/guides/wknd/core/models/package-info.java` and update `@Version("2.0.0")` to `@Version("2.1.0")`.
+Since the WKND source's Java package `com.adobe.aem.guides.wknd.core.models` declares a version of `2.0.0`, and we are adding a non-breaking public interface and methods, the version must be increased to `2.1.0`. Open the file at `core/src/main/java/com/adobe/aem/guides/wknd/core/models/package-info.java` and update `@Version("2.0.0")` to `@Version("2.1.0")`.
 
     ```
     @Version("2.1.0")
@@ -449,7 +449,7 @@ Since the WKND source's Java package `com.adobe.aem.guides.wknd.core.models` dec
     import org.osgi.annotation.versioning.Version;
     ```
 
-Whenever a changes are made to the files in this package, the [package version must be adjusted semantically](https://semver.org/). If not, the Maven project's [bnd-baseline-maven-plugin](https://github.com/bndtools/bnd/tree/master/maven/bnd-baseline-maven-plugin) will detect an invalid package version and break the built. Luckily, on failure the Maven plugin reports the invalid Java package version as well as the the version it should be. Just updated teh `@Version("...")` declaration in the violating Java package's `package-info.java` to the version recommended by the plugin to fix.
+Whenever a changes are made to the files in this package, the [package version must be adjusted semantically](https://semver.org/). If not, the Maven project's [bnd-baseline-maven-plugin](https://github.com/bndtools/bnd/tree/master/maven/bnd-baseline-maven-plugin) will detect an invalid package version and break the built. Luckily, on failure the Maven plugin reports the invalid Java package version as well as the the version it should be. To fix it just update the `@Version("...")` declaration in the violating Java package's `package-info.java` to the version recommended by the plugin.
 
 ### Byline implementation {#byline-implementation}
 
@@ -1083,7 +1083,7 @@ Add default styles for the Byline component. In the **ui.frontend** project unde
     @import './styles/*.scss';
     ```
 
-    `main.scss` is the main entrypoint for styles included by the `ui.frontend` module. The regular expression `'../components/**/*.scss'` will include all files beneat the `components/` folder.
+    `main.scss` is the main entry point for styles included by the `ui.frontend` module. The regular expression `'../components/**/*.scss'` will include all files beneath the `components/` folder.
 
 1. Build and deploy the full project to AEM:
 
